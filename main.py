@@ -3,7 +3,7 @@ import os
 from faker import Faker
 from file_operations import render_template
 
-# Папка, в которой лежит этот скрипт
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 letters_mapping = {
@@ -64,7 +64,7 @@ def main():
         os.makedirs(output_dir)
 
     for i in range(10):
-        # Генерация данных
+        
         first_name = fake.first_name()
         last_name = fake.last_name()
         city = fake.city()
@@ -76,13 +76,13 @@ def main():
         intelligence = random.randint(3, 18)
         luck = random.randint(3, 18)
 
-        # Выбор и стилизация навыков
+        
         selected_skills = random.sample(SKILLS, 3)
         skill_1 = stylize_skill(selected_skills[0])
         skill_2 = stylize_skill(selected_skills[1])
         skill_3 = stylize_skill(selected_skills[2])
 
-        # Создание словаря context
+        
         context = {
             'first_name': first_name,
             'last_name': last_name,
@@ -98,14 +98,14 @@ def main():
             'skill_3': skill_3
         }
 
-        # Уникальное имя файла в папке 'карточки'
+       
         output_filename = os.path.join(
             output_dir,
-            'my_card_{}_{}_{}.txt'.format(i, first_name, last_name)
+            'my_card_{}_{}_{}.svg'.format(i, first_name, last_name)
         )
 
-        # Путь к шаблону относительно скрипта
-        template_path = os.path.join(BASE_DIR, 'template.txt')
+        
+        template_path = os.path.join(BASE_DIR, 'charsheet.svg')
 
         render_template(template_path, output_filename, context)
         
