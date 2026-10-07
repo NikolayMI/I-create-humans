@@ -6,7 +6,7 @@ from file_operations import render_template
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-letters_mapping = {
+LETTERS_MAPPING = {
     'а': 'а͠',
     'б': 'б̋',
     'в': 'в͒͠',
@@ -90,12 +90,13 @@ SKILLS = [
 ]
 
 
+
 def stylize_skill(skill):
     """Принимает навык и возвращает его в руническом виде."""
     stylized_skill = ''
     for letter in skill:
-        if letter in letters_mapping:
-            stylized_skill += letters_mapping[letter]
+        if letter in LETTERS_MAPPING:
+            stylized_skill += LETTERS_MAPPING[letter]
         else:
             stylized_skill += letter
     return stylized_skill
@@ -108,7 +109,6 @@ def main():
         os.makedirs(output_dir)
 
     for i in range(10):
-        
         first_name = fake.first_name()
         last_name = fake.last_name()
         city = fake.city()
@@ -120,13 +120,11 @@ def main():
         intelligence = random.randint(3, 18)
         luck = random.randint(3, 18)
 
-        
         selected_skills = random.sample(SKILLS, 3)
         skill_1 = stylize_skill(selected_skills[0])
         skill_2 = stylize_skill(selected_skills[1])
         skill_3 = stylize_skill(selected_skills[2])
 
-        
         context = {
             'first_name': first_name,
             'last_name': last_name,
@@ -141,17 +139,16 @@ def main():
             'skill_2': skill_2,
             'skill_3': skill_3,
         }
-       
+
         output_filename = os.path.join(
             output_dir,
             'my_card_{}_{}_{}.svg'.format(i, first_name, last_name)
         )
 
-        
         template_path = os.path.join(BASE_DIR, 'charsheet.svg')
 
         render_template(template_path, output_filename, context)
-        
+
 
 
 if __name__ == '__main__':
