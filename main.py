@@ -76,7 +76,6 @@ LETTERS_MAPPING = {
     ' ': ' ',
 }
 
-fake = Faker('ru_RU')
 
 SKILLS = [
     'Стремительный прыжок',
@@ -92,7 +91,6 @@ SKILLS = [
 
 
 def stylize_skill(skill):
-    """Принимает навык и возвращает его в руническом виде."""
     stylized_skill = ''
     for letter in skill:
         if letter in LETTERS_MAPPING:
@@ -103,7 +101,7 @@ def stylize_skill(skill):
 
 
 def main():
-    """Генерирует 10 карточек персонажей."""
+    fake = Faker('ru_RU')
     output_dir = os.path.join(BASE_DIR, 'карточки')
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
